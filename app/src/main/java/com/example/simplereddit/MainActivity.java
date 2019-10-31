@@ -1,4 +1,4 @@
-package com.example.simpleretrofit;
+package com.example.simplereddit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
