@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    android:elevation="@dimen/toolbar_elevation"
+    android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
+
+    <TextView
+        android:id="@+id/tv_toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/common_font_title"
+        android:layout_gravity="center"/>
+
+    <ImageButton
+        android:id="@+id/ib_toolbar_left"
+        android:layout_width="@dimen/icon_common_width_medium"
+        android:layout_height="@dimen/icon_common_height_medium"
+        android:layout_gravity="start"
+        android:background="@drawable/ic_arrow_back"
+        android:visibility="gone"/>
+
+    <ImageButton
+        android:id="@+id/ib_toolbar_right"
+        android:layout_width="@dimen/icon_common_width_medium"
+        android:layout_height="@dimen/icon_common_height_medium"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/common_margin_large"
+        android:visibility="gone"/>
+
+</androidx.appcompat.widget.Toolbar>
