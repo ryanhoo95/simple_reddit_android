@@ -1,1 +1,1 @@
-# simple_reddit_android
+# Simple Reddit Android
