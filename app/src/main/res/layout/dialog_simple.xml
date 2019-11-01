@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_dialog">
+
+    <!-- content -->
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:padding="@dimen/common_padding_content">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/dialog_image_width"
+            android:layout_height="@dimen/dialog_image_height"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/common_margin"
+            android:textSize="@dimen/common_font" />
+
+    </LinearLayout>
+    <!-- end content -->
+
+    <!-- button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin"
+        android:textSize="@dimen/common_font_input"
+        android:textColor="@color/colorWhite"
+        android:textAllCaps="false"
+        android:text="@string/txt_ok"
+        android:background="@drawable/background_button_bottom_corner_radius"
+        app:layout_constraintTop_toBottomOf="@+id/ll_content"/>
+    <!-- end button -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

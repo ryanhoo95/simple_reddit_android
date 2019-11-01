@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.simplereddit.R;
+import com.example.simplereddit.utils.customDialog.ProgressDialog;
+import com.example.simplereddit.utils.customDialog.SimpleDialog;
 
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -52,5 +54,6 @@ public class HomeFragment extends Fragment {
     private void findView(View view) {
         tvTitle = view.findViewById(R.id.tv_toolbar_title);
         tvTitle.setText("hello");
+
     }
 }

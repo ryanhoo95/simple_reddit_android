@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Simple Retrofit</string>
+    <string name="app_name">Simple Reddit</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_press_back_again_to_exit">Press back again to exit.</string>
+    <string name="txt_ok">OK</string>
 </resources>
