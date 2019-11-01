@@ -57,7 +57,7 @@ public class SimpleDialog {
             // by default, dismiss dialog when button is clicked
             btnAction.setOnClickListener(view1 -> dismiss());
         } catch (Exception e) {
-            Timber.d(e);
+            Timber.e(e);
         }
     }
 

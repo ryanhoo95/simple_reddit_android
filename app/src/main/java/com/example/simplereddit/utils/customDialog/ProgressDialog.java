@@ -43,7 +43,7 @@ public class ProgressDialog {
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             }
         } catch (Exception e) {
-            Timber.d(e);
+            Timber.e(e);
         }
     }
 
