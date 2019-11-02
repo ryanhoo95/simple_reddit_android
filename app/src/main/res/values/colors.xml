@@ -6,4 +6,8 @@
 
     <!-- common color -->
     <color name="colorWhite">#ffffff</color>
+    <color name="colorLightGrey">#e5e5e5</color>
+    <color name="colorGreen">#31d912</color>
+    <color name="colorRed">#ff0000</color>
+    <color name="colorTextBlack">#333333</color>
 </resources>

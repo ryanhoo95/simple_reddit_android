@@ -1,11 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".fragment.HomeFragment"
     android:background="@color/colorWhite">
 
-    <include layout="@layout/toolbar" />
+    <!-- toolbar -->
+    <include
+        layout="@layout/toolbar" />
+    <!-- end toolbar -->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- swipe refresh -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- collapsing new topic -->
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/abl_topic"
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/ctl_topic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:contentScrim="@color/colorLightGrey"
+                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/common_padding_content">
+
+                        <!-- new topic -->
+                        <EditText
+                            android:id="@+id/edt_topic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_new_topic"
+                            android:lines="2"
+                            android:hint="@string/txt_new_topic"
+                            android:gravity="top"
+                            android:maxLength="255"
+                            android:textSize="@dimen/common_font_input"
+                            android:inputType="textMultiLine"
+                            android:padding="@dimen/common_padding_medium"/>
+                        <!-- end new topic -->
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_send"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:textSize="@dimen/common_font_input"
+                            android:text="@string/txt_send"
+                            android:layout_marginTop="@dimen/common_margin"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+            <!-- end collapsing new topic -->
+
+            <!-- topic list -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_topics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/single_topic"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            <!-- end topic list -->
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <!-- swipe refresh -->
+
+</LinearLayout>

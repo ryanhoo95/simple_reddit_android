@@ -6,4 +6,9 @@
     <string name="txt_press_back_again_to_exit">Press back again to exit.</string>
     <string name="txt_ok">OK</string>
     <string name="txt_no_internet">Internet connection is not available.</string>
+    <string name="txt_home">Home</string>
+    <string name="txt_new_topic">New Topic</string>
+    <string name="txt_send">Send</string>
+    <string name="txt_request_failed">Request failed. Please try again.</string>
+    <string name="txt_field_required">This field is required.</string>
 </resources>
