@@ -50,7 +50,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/background_new_topic"
-                            android:lines="2"
+                            android:lines="4"
                             android:hint="@string/txt_new_topic"
                             android:gravity="top"
                             android:maxLength="255"
