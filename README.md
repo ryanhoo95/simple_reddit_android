@@ -12,6 +12,9 @@ The server might be put to sleep after some period of time (no request), so you 
 OkHttp is used to make API call using custom class named WebService.
 The response is saved in Result object.
 
+**Backend**
+NodeJS, Restify, MoongoDB
+
 ## In Memory Cache
 ViewModel is used as memory cache. At home page, after getting the top 20 topics, the list will be checked whether it contains current user's topic, if there is any, the topic will be saved to the ViewModel.
 
