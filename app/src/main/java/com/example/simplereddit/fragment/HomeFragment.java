@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -29,6 +31,7 @@ import com.example.simplereddit.utils.customDialog.SimpleDialog;
 import com.example.simplereddit.utils.webService.RequestParams;
 import com.example.simplereddit.utils.webService.Result;
 import com.example.simplereddit.utils.webService.WebService;
+import com.example.simplereddit.viewModel.TopicViewModel;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.button.MaterialButton;
 import com.jakewharton.rxbinding3.view.RxView;
@@ -52,6 +55,7 @@ import timber.log.Timber;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements AppBarLayout.OnOffsetChangedListener {
+    private static final String TAG = HomeFragment.class.getSimpleName();
 
     // view
     private CompositeDisposable compositeDisposable;
@@ -67,6 +71,7 @@ public class HomeFragment extends Fragment implements AppBarLayout.OnOffsetChang
     // data
     private ArrayList<Topic> topics = new ArrayList<>();
     private TopicAdapter topicAdapter;
+    private TopicViewModel topicViewModel;
 
     // progress dialog
     private ProgressDialog progressDialog;
@@ -82,6 +87,9 @@ public class HomeFragment extends Fragment implements AppBarLayout.OnOffsetChang
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // init view model
+        topicViewModel = ViewModelProviders.of(getActivity()).get(TopicViewModel.class);
     }
 
     @Override
@@ -148,8 +156,17 @@ public class HomeFragment extends Fragment implements AppBarLayout.OnOffsetChang
         // my recent post
         compositeDisposable.add(
                 RxView.clicks(ibMyTopic).subscribe(view -> {
-                    topics.add(new Topic());
-                    topicAdapter.notifyDataSetChanged();
+                    try {
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                        fragmentManager.beginTransaction()
+                                .add(R.id.fl_fragment, new MyRecentPostFragment())
+                                .hide(HomeFragment.this)
+                                .addToBackStack(TAG)
+                                .commit();
+                    } catch (NullPointerException e) {
+                        Timber.e(e);
+                    }
                 })
         );
 
@@ -222,7 +239,7 @@ public class HomeFragment extends Fragment implements AppBarLayout.OnOffsetChang
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                     rvTopics.setLayoutManager(linearLayoutManager);
 
-                    topicAdapter = new TopicAdapter(getContext(), topics);
+                    topicAdapter = new TopicAdapter(getContext(), topics, false);
                     rvTopics.setAdapter(topicAdapter);
 
                     // add vote listener
@@ -242,6 +259,9 @@ public class HomeFragment extends Fragment implements AppBarLayout.OnOffsetChang
                 }
 
                 topicAdapter.notifyDataSetChanged();
+
+                // find thru the list whether contain current user topics, and then saved to cache
+                topicViewModel.findCurrentUserTopicAndSaveCache(getContext(), topics);
             }
 
             @Override
@@ -307,6 +327,9 @@ public class HomeFragment extends Fragment implements AppBarLayout.OnOffsetChang
                     topics.add(topic);
                     topicAdapter.notifyDataSetChanged();
                 }
+
+                // update view model data
+                topicViewModel.updateTopic(topic);
             }
 
             @Override
@@ -366,6 +389,11 @@ public class HomeFragment extends Fragment implements AppBarLayout.OnOffsetChang
                     btnVote.setText(topic.getUpVote());
                 } else {
                     btnVote.setText(topic.getDownVote());
+                }
+
+                // update view model data, only if the voting topic is posted by current user
+                if (topic.getDeviceId().equals(DeviceUtils.getDeviceId(getContext()))) {
+                    topicViewModel.updateTopic(topic);
                 }
             }
 

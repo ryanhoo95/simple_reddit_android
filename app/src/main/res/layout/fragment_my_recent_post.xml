@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".fragment.HomeFragment"
+    android:background="@color/colorWhite">
+
+    <!-- toolbar -->
+    <include
+        layout="@layout/toolbar" />
+    <!-- end toolbar -->
+
+    <!-- swipe refresh -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- topic list -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_topics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/single_topic"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        <!-- end topic list -->
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <!-- swipe refresh -->
+
+</LinearLayout>

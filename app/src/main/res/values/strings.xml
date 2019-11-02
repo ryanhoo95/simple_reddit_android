@@ -11,4 +11,6 @@
     <string name="txt_send">Send</string>
     <string name="txt_request_failed">Request failed. Please try again.</string>
     <string name="txt_field_required">This field is required.</string>
+    <string name="txt_my_recent_post">My Recent Post</string>
+    <string name="txt_nothing_posted">Nothing posted.</string>
 </resources>

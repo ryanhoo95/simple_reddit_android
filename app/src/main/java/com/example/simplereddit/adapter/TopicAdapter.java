@@ -21,11 +21,13 @@ import io.reactivex.disposables.Disposable;
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Topic> topics;
+    private boolean disableVote;
     private OnVotingListener onVotingListener;
 
-    public TopicAdapter(Context context, ArrayList<Topic> topics) {
+    public TopicAdapter(Context context, ArrayList<Topic> topics, boolean disableVote) {
         this.context = context;
         this.topics = topics;
+        this.disableVote = disableVote;
     }
 
     @NonNull
@@ -46,15 +48,22 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         // upvote
         holder.btnUpvote.setText(topic.getUpVote());
-        holder.disposableUpvote = RxView.clicks(holder.btnUpvote).subscribe(
-                view -> onVotingListener.onUpvoted(topic, holder.btnUpvote, holder.getAdapterPosition())
-        );
 
         // downvote
         holder.btnDownvote.setText(topic.getDownVote());
-        holder.disposableDownvote = RxView.clicks(holder.btnDownvote).subscribe(
-                view -> onVotingListener.onDownvoted(topic, holder.btnDownvote, holder.getAdapterPosition())
-        );
+
+        if (disableVote) {
+            holder.btnUpvote.setEnabled(false);
+            holder.btnDownvote.setEnabled(false);
+        } else {
+            holder.disposableUpvote = RxView.clicks(holder.btnUpvote).subscribe(
+                    view -> onVotingListener.onUpvoted(topic, holder.btnUpvote, holder.getAdapterPosition())
+            );
+
+            holder.disposableDownvote = RxView.clicks(holder.btnDownvote).subscribe(
+                    view -> onVotingListener.onDownvoted(topic, holder.btnDownvote, holder.getAdapterPosition())
+            );
+        }
     }
 
     @Override

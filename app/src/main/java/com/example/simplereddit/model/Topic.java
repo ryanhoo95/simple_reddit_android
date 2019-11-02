@@ -94,4 +94,12 @@ public class Topic implements Serializable {
     public void setDownVote(String downVote) {
         this.downVote = downVote;
     }
+
+    public void update(Topic topic) {
+        id = topic.getId();
+        deviceId = topic.getDeviceId();
+        this.topic = topic.getTopic();
+        upVote = topic.getUpVote();
+        downVote = topic.getDownVote();
+    }
 }
